@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0c0c0c">
+<meta name="description" content="La 2.8.1 Barbershop · Demostración de gestión operativa y de personal.">
+<title>La 2.8.1 Barbershop | Barber OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&family=Rye&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<script src="./app.js" defer></script>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar" id="sidebar">
+<div class="identity"><div class="crest">2<span>·8·</span>1<small>BARBERSHOP</small></div><div><strong>LA 2.8.1</strong><em>BARBER OS <i>01</i></em></div></div>
+<div class="nav-caption">CONTROL CENTRAL</div>
+<nav id="nav" aria-label="Navegación">
+<button class="nav-link active" data-page="inicio"><span>▦</span> Dashboard</button>
+<button class="nav-link" data-page="registro"><span>✂</span> Registrar servicio</button>
+<button class="nav-link admin-only" data-page="equipo"><span>♧</span> Personal / Barberos</button>
+<button class="nav-link admin-only" data-page="catalogo"><span>▤</span> Catálogo y precios</button>
+<button class="nav-link" data-page="historial"><span>≡</span> Movimientos</button>
+</nav>
+<div class="sidebar-bottom"><div class="status-dot"></div><div><strong>Modo demostración</strong><span>Datos solo en este dispositivo</span></div></div>
+<div class="credit">POWERED BY <b>CORONADO SYSTEMS</b></div>
+</aside>
+<div class="mobile-overlay" id="mobile-overlay"></div>
+<div class="main">
+<header class="topbar">
+<div class="heading-group"><button class="menu-btn" id="menu-btn" type="button" aria-label="Abrir menú">☰</button><div><span>LA 2.8.1 / OPERACIÓN</span><h1 id="page-title">Centro de control</h1></div></div>
+<div class="top-controls"><span class="date-chip" id="today"></span><label for="role" class="role-label">VISTA</label><select id="role" aria-label="Vista de demostración"><option value="admin">Propietario</option></select><span class="avatar">281</span></div>
+</header>
+<div class="demo-ribbon"><b>DEMO INTERACTIVA</b> · La información se guarda en este navegador; no se comparte entre tablets ni tiene acceso seguro real. <button type="button" id="hide-ribbon" aria-label="Cerrar aviso">×</button></div>
+<main class="content">
+<section class="page active" id="page-inicio">
+<div class="hero"><div><div class="eyebrow">CONTROL TOTAL · BARBER OS</div><h2>Tu barbería.<br><em>En tus manos.</em></h2><p>Servicios, ingresos y productividad de cada barbero, organizados en un solo lugar.</p><button class="gold-btn" data-goto="registro">+ &nbsp; Registrar servicio</button></div><div class="hero-badge"><span>THE</span><strong>2.8.1</strong><small>CONTROL SYSTEM</small></div></div>
+<div class="section-toolbar"><div><span class="eyebrow">RESUMEN OPERATIVO</span><h3>Visión general</h3></div><div class="segments" id="range"><button class="chosen" data-range="today">Hoy</button><button data-range="week">7 días</button><button data-range="month">30 días</button><button data-range="all">Todo</button></div></div>
+<div class="metrics">
+<div class="metric highlight"><span>INGRESOS COBRADOS</span><strong id="kpi-income">$0</strong><small>Solo movimientos cobrados</small></div>
+<div class="metric"><span>SERVICIOS REGISTRADOS</span><strong id="kpi-count">0</strong><small>Trabajos realizados</small></div>
+<div class="metric"><span>COMISIONES ESTIMADAS</span><strong id="kpi-comm">$0</strong><small>No incluye propinas</small></div>
+<div class="metric"><span>POR COBRAR</span><strong id="kpi-pending">$0</strong><small>Servicios con pago pendiente</small></div>
+</div>
+<div class="charts-layout">
+<div class="panel"><div class="panel-heading"><div><span class="eyebrow">INGRESOS</span><h3>Últimos 7 días</h3></div><small>Ingresos cobrados</small></div><div class="bar-chart" id="bar-chart"></div></div>
+<div class="panel"><div class="panel-heading"><div><span class="eyebrow">EQUIPO</span><h3>Productividad</h3></div><button class="text-btn admin-only" data-goto="equipo">Ver personal →</button></div><div id="ranking"></div></div>
+</div>
+<div class="panel"><div class="panel-heading"><div><span class="eyebrow">ACTIVIDAD</span><h3>Movimientos recientes</h3></div><button class="text-btn" data-goto="historial">Ver todo →</button></div><div class="table-wrap"><table><thead><tr><th>SERVICIO</th><th>BARBERO</th><th>FECHA</th><th>IMPORTE</th><th>ESTADO</th></tr></thead><tbody id="recent"></tbody></table></div></div>
+</section>
+<section class="page" id="page-registro">
+<div class="section-toolbar page-intro"><div><span class="eyebrow">OPERACIÓN DIARIA</span><h2>Nuevo servicio</h2><p>Selecciona uno o varios conceptos. Registra quién atendió y cómo se cobró.</p></div><span class="outline-badge">✂ &nbsp; REGISTRO RÁPIDO</span></div>
+<div class="pos-layout">
+<div><div class="panel-heading"><div><h3>Elige los servicios</h3><p>Toca cada tarjeta para añadirla al ticket.</p></div></div><div class="segments catalog-filter" id="kind-filter"><button data-kind="all" class="chosen">Todos</button><button data-kind="servicio">Servicios</button><button data-kind="producto">Productos</button></div><div class="items-grid" id="sale-items"></div></div>
+<div class="ticket">
+<div class="ticket-header"><div><span class="eyebrow">LA 2.8.1 BARBERSHOP</span><h3>Ticket de servicio</h3></div><b>✂</b></div>
+<div class="field"><label for="seller">BARBERO RESPONSABLE</label><select id="seller"></select></div>
+<div class="field"><label for="client">CLIENTE <small>(opcional)</small></label><input id="client" maxlength="70" placeholder="Referencia del cliente"></div>
+<div class="ticket-divider"></div><div class="ticket-label"><strong>CONCEPTOS</strong><button id="clear-ticket" class="text-btn">Limpiar</button></div><div id="ticket-lines" class="ticket-lines"></div><div class="ticket-divider"></div>
+<div class="field"><label for="tip">PROPINA</label><input id="tip" type="number" min="0" step="1" value="0" max="100000"></div>
+<div class="field"><label for="payment">MÉTODO DE PAGO</label><select id="payment"><option value="efectivo">Efectivo</option><option value="transferencia">Transferencia</option><option value="tarjeta">Tarjeta</option></select></div>
+<div class="field"><label for="payment-status">ESTADO DEL PAGO</label><select id="payment-status"><option value="cobrado">Cobrado</option><option value="pendiente">Pendiente por cobrar</option></select></div>
+<div class="field"><label for="note">NOTA <small>(opcional)</small></label><textarea id="note" rows="2" maxlength="250" placeholder="Observaciones del trabajo"></textarea></div>
+<div class="ticket-divider"></div><div class="price-line"><span>Subtotal</span><b id="subtotal">$0</b></div><div class="price-line"><span>Propina</span><b id="tip-total">$0</b></div><div class="total-line"><span>TOTAL</span><strong id="total">$0</strong></div><button class="gold-btn full" id="register">✓ &nbsp; Guardar movimiento</button><p class="form-hint">La comisión se calcula solo sobre servicios cobrados, sin propinas ni productos.</p>
+</div></div>
+</section>
+<section class="page admin-only" id="page-equipo">
+<div class="section-toolbar page-intro"><div><span class="eyebrow">RECURSOS HUMANOS</span><h2>Gestión de barberos</h2><p>Agrega, edita, desactiva y reactiva integrantes sin borrar los registros históricos.</p></div><button class="gold-btn" id="new-barber">+ &nbsp; Añadir barbero</button></div>
+<div class="team-stats"><div><strong id="count-active">0</strong><span>Activos</span></div><div><strong id="count-inactive">0</strong><span>Inactivos</span></div><div><strong id="avg-commission">—</strong><span>Comisión promedio</span></div></div>
+<div class="team-grid" id="staff"></div>
+<div class="info-note">Los barberos desactivados no aparecen al registrar nuevos servicios; su historial y sus comisiones anteriores permanecen disponibles.</div>
+</section>
+<section class="page admin-only" id="page-catalogo">
+<div class="section-toolbar page-intro"><div><span class="eyebrow">MENÚ DEL NEGOCIO</span><h2>Catálogo y precios</h2><p>Catálogo precargado con la fotografía del menú. Puedes actualizar precios y añadir servicios.</p></div><button class="gold-btn" id="new-item">+ &nbsp; Añadir concepto</button></div>
+<div class="panel"><div class="table-wrap"><table><thead><tr><th>SERVICIO / PRODUCTO</th><th>TIPO</th><th>PRECIO</th><th>ESTADO</th><th>ACCIONES</th></tr></thead><tbody id="catalog"></tbody></table></div></div>
+</section>
+<section class="page" id="page-historial">
+<div class="section-toolbar page-intro"><div><span class="eyebrow">TRAZABILIDAD OPERATIVA</span><h2>Movimientos</h2><p>Filtra ingresos, pagos pendientes y servicios por barbero.</p></div><button class="outline-btn admin-only" id="export">↓ &nbsp; Exportar CSV</button></div>
+<div class="panel"><div class="filters"><select id="filter-barber" aria-label="Filtrar por barbero"></select><select id="filter-state" aria-label="Filtrar por estado"><option value="all">Todos los estados</option><option value="cobrado">Cobrados</option><option value="pendiente">Por cobrar</option></select><input id="filter-text" placeholder="Buscar cliente o servicio" aria-label="Buscar movimientos"></div><div class="table-wrap"><table><thead><tr><th>FOLIO / FECHA</th><th>DETALLE</th><th>BARBERO</th><th>TOTAL</th><th>ESTADO</th><th>ACCIÓN</th></tr></thead><tbody id="history"></tbody></table></div></div>
+</section>
+<footer>LA 2.8.1 BARBERSHOP · DEMO V1.0 <span>DESARROLLADO POR CORONADO SYSTEMS</span></footer>
+</main>
+</div>
+</div>
+<dialog id="staff-modal" class="modal"><form id="staff-form"><header><div><span class="eyebrow">PERSONAL</span><h2 id="staff-modal-title">Añadir barbero</h2></div><button type="button" class="close-modal" aria-label="Cerrar">×</button></header><input type="hidden" name="id" id="staff-id"><div class="field"><label for="staff-name">NOMBRE / APODO</label><input id="staff-name" required maxlength="45" placeholder="Ej. Alex"></div><div class="field"><label for="staff-percent">COMISIÓN POR SERVICIOS (%)</label><input id="staff-percent" required type="number" min="0" max="100" step="0.5" value="40"></div><div class="field"><label for="staff-color">DISTINTIVO</label><select id="staff-color"><option value="gold">Dorado</option><option value="blue">Azul acero</option><option value="green">Verde salvia</option><option value="purple">Púrpura</option></select></div><div class="modal-actions"><button type="button" class="outline-btn close-modal">Cancelar</button><button type="submit" class="gold-btn">Guardar barbero</button></div></form></dialog>
+<dialog id="item-modal" class="modal"><form id="item-form"><header><div><span class="eyebrow">CATÁLOGO</span><h2 id="item-modal-title">Añadir concepto</h2></div><button type="button" class="close-modal" aria-label="Cerrar">×</button></header><input type="hidden" id="item-id"><div class="field"><label for="item-name">NOMBRE</label><input id="item-name" maxlength="65" required></div><div class="field"><label for="item-kind">TIPO</label><select id="item-kind"><option value="servicio">Servicio</option><option value="producto">Producto</option></select></div><div class="field"><label for="item-price">PRECIO (MXN) · DEJAR VACÍO SI ESTÁ POR DEFINIR</label><input id="item-price" type="number" min="0" max="1000000" step="0.01" placeholder="Pendiente"></div><div class="modal-actions"><button type="button" class="outline-btn close-modal">Cancelar</button><button type="submit" class="gold-btn">Guardar concepto</button></div></form></dialog>
+<div role="status" aria-live="polite" class="toast" id="toast"></div>
+</body>
+</html>
